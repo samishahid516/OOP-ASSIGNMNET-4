@@ -14,22 +14,21 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TeacherTimetable {
 
     JFrame frame;
-    private JTable table_1;
-    private JTable table_2;
+    private JTable NameTable;
+    private JTable ApplicationTable;
     private JTable table;
 
-    /**
-     * Launch the application.
-     */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    // Pass Application ID as a parameter
+                  
                     TeacherTimetable window = new TeacherTimetable("Your_Application_ID_Here");
                     window.frame.setVisible(true);
                 } catch (Exception e) {
@@ -39,20 +38,15 @@ public class TeacherTimetable {
         });
     }
 
-    /**
-     * Create the application.
-     */
     public TeacherTimetable(String applicationId) {
         initialize(applicationId);
     }
 
-    /**
-     * Initialize the contents of the frame.
-     */
+   
     private void initialize(String applicationId) {
         frame = new JFrame();
         frame.getContentPane().setBackground(SystemColor.inactiveCaption);
-        frame.setBounds(100, 100, 766, 692);
+        frame.setBounds(100, 100, 766, 649);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
@@ -78,26 +72,32 @@ public class TeacherTimetable {
         lblStudentEnrollmentId.setBounds(22, 296, 127, 25);
         frame.getContentPane().add(lblStudentEnrollmentId);
 
-        JButton btnNewButton = new JButton("Close");
-        btnNewButton.setBounds(316, 567, 124, 33);
-        frame.getContentPane().add(btnNewButton);
-
-        table_1 = new JTable();
-        table_1.setBounds(131, 270, 145, 19);
-        frame.getContentPane().add(table_1);
-
-        table_2 = new JTable();
-        table_2.setBounds(131, 301, 145, 19);
-        frame.getContentPane().add(table_2);
+        JButton btnClose = new JButton("Close");
+        btnClose.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		System.exit(0);
+        	}
+        });
         
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(22, 338, 720, 206);
-        frame.getContentPane().add(scrollPane);
+        btnClose.setBounds(316, 567, 124, 33);
+        frame.getContentPane().add(btnClose);
+
+        NameTable = new JTable();
+        NameTable.setBounds(131, 270, 145, 19);
+        frame.getContentPane().add(NameTable);
+
+        ApplicationTable = new JTable();
+        ApplicationTable.setBounds(131, 301, 145, 19);
+        frame.getContentPane().add(ApplicationTable);
+        
+        JScrollPane TimeTable = new JScrollPane();
+        TimeTable.setBounds(22, 338, 720, 206);
+        frame.getContentPane().add(TimeTable);
         
         table = new JTable();
-        scrollPane.setViewportView(table);
+        TimeTable.setViewportView(table);
 
-        // Load data based on provided Application ID
+       
         loadData(applicationId);
     }
 
@@ -126,14 +126,14 @@ public class TeacherTimetable {
                 model2.addRow(new Object[]{applicationID});
             }
 
-            table_1.setModel(model1);
-            table_2.setModel(model2);
+            NameTable.setModel(model1);
+            ApplicationTable.setModel(model2);
 
             try (PreparedStatement stmtTimetable = conn.prepareStatement(queryTimetable)) {
                 stmtTimetable.setString(1, applicationId);
                 ResultSet rsTimetable = stmtTimetable.executeQuery();
 
-                // Add timetable information to the table
+              
                 while (rsTimetable.next()) {
                     String courseName = rsTimetable.getString("CourseName");
                     String dayOfWeek = rsTimetable.getString("DayOfWeek");
@@ -142,12 +142,12 @@ public class TeacherTimetable {
                     String roomID = rsTimetable.getString("RoomID");
                     String sectionID = rsTimetable.getString("SectionID");
 
-                    // Add the row to the table model
+                   
                     model.addRow(new Object[]{courseName, dayOfWeek, startTime, endTime, roomID, sectionID});
                 }
             }
 
-            // Set the model to the table
+          
             table.setModel(model);
             table.getColumnModel().getColumn(0).setPreferredWidth(180);
 

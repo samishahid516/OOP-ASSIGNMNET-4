@@ -19,12 +19,9 @@ import java.sql.SQLException;
 public class StudentLogin {
 
     JFrame frame;
-    private JTextField textField;
+    private JTextField EnterEnrollmentID;
     private Connection connection;
 
-    /**
-     * Launch the application.
-     */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -38,9 +35,7 @@ public class StudentLogin {
         });
     }
 
-    /**
-     * Create the application.
-     */
+   
     public StudentLogin() {
         initialize();
         // Establish database connection
@@ -51,13 +46,11 @@ public class StudentLogin {
         }
     }
 
-    /**
-     * Initialize the contents of the frame.
-     */
+   
     private void initialize() {
         frame = new JFrame();
         frame.getContentPane().setBackground(SystemColor.inactiveCaption);
-        frame.setBounds(100, 100, 512, 454);
+        frame.setBounds(100, 100, 512, 438);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
@@ -78,66 +71,66 @@ public class StudentLogin {
         lblStudentLogin.setBounds(176, 219, 164, 42);
         frame.getContentPane().add(lblStudentLogin);
 
-        textField = new JTextField();
-        textField.setColumns(10);
-        textField.setBounds(30, 298, 433, 25);
-        frame.getContentPane().add(textField);
+        EnterEnrollmentID = new JTextField();
+        EnterEnrollmentID.setColumns(10);
+        EnterEnrollmentID.setBounds(30, 298, 433, 25);
+        frame.getContentPane().add(EnterEnrollmentID);
 
-        JButton btnNewButton = new JButton("View");
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton btnView = new JButton("View");
+        btnView.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String enrollmentID = textField.getText().trim(); // Retrieve the enrollment ID from the text field
-                // Query the database to check if the enrollment ID exists
+                String enrollmentID = EnterEnrollmentID.getText().trim(); 
+           
                 boolean enrollmentExists = checkEnrollmentID(enrollmentID);
                 if (enrollmentExists) {
-                    // If enrollment ID exists, show the form
+               
                     StudentTimetable studentTimetable = new StudentTimetable(enrollmentID);
-                    frame.setVisible(false); // Hide the current login frame
-                    studentTimetable.frame.setVisible(true); // Show the student timetable form
+                    frame.setVisible(false); 
+                    studentTimetable.frame.setVisible(true); 
                 } else {
-                    // If enrollment ID doesn't exist, show an error message
+                  
                     JOptionPane.showMessageDialog(frame, "Enrollment ID not found", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
 
-        btnNewButton.setBounds(30, 353, 117, 32);
-        frame.getContentPane().add(btnNewButton);
+        btnView.setBounds(30, 353, 117, 32);
+        frame.getContentPane().add(btnView);
 
-        JButton btnNewButton_1 = new JButton("Clear");
-        btnNewButton_1.addActionListener(new ActionListener() {
+        JButton btnClear = new JButton("Clear");
+        btnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                textField.setText(null);
+                EnterEnrollmentID.setText(null);
             }
         });
 
-        btnNewButton_1.setBounds(196, 353, 117, 32);
-        frame.getContentPane().add(btnNewButton_1);
+        btnClear.setBounds(196, 353, 117, 32);
+        frame.getContentPane().add(btnClear);
 
-        JButton btnNewButton_2 = new JButton("Close");
-        btnNewButton_2.addActionListener(new ActionListener() {
+        JButton btnClose = new JButton("Close");
+        btnClose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
 
             }
         });
 
-        btnNewButton_2.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-        btnNewButton_2.setBounds(351, 353, 112, 32);
-        frame.getContentPane().add(btnNewButton_2);
+        btnClose.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        btnClose.setBounds(351, 353, 112, 32);
+        frame.getContentPane().add(btnClose);
     }
 
-    // Method to check if the enrollment ID exists in the database
+
     private boolean checkEnrollmentID(String enrollmentID) {
         try {
             String query = "SELECT * FROM add_student WHERE EnrollmentID=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, enrollmentID);
             ResultSet resultSet = statement.executeQuery();
-            return resultSet.next(); // Returns true if enrollment ID exists, false otherwise
+            return resultSet.next(); 
         } catch (SQLException e) {
             e.printStackTrace();
-            return false; // Error occurred, return false
+            return false; 
         }
     }
 }

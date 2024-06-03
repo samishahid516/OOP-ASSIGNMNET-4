@@ -14,9 +14,7 @@ public class AdminDashBoard {
 
 	JFrame frame;
 
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -30,16 +28,12 @@ public class AdminDashBoard {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+	
 	public AdminDashBoard() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(SystemColor.inactiveCaption);
@@ -57,8 +51,8 @@ public class AdminDashBoard {
 		lblAdminDashboaed.setBounds(232, 228, 206, 42);
 		frame.getContentPane().add(lblAdminDashboaed);
 		
-		JButton btnDisplayTeacher = new JButton("View Teacher");
-		btnDisplayTeacher.addActionListener(new ActionListener() {
+		JButton btnViewTeacher = new JButton("View Teacher");
+		btnViewTeacher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ViewTeachers viewteachers = new ViewTeachers ();
 	     		   AdminDashBoard.setVisible(false);
@@ -67,13 +61,13 @@ public class AdminDashBoard {
 			}
 		});
 		
-		btnDisplayTeacher.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-		btnDisplayTeacher.setBackground(SystemColor.activeCaption);
-		btnDisplayTeacher.setBounds(44, 416, 242, 33);
-		frame.getContentPane().add(btnDisplayTeacher);
+		btnViewTeacher.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+		btnViewTeacher.setBackground(SystemColor.activeCaption);
+		btnViewTeacher.setBounds(44, 416, 242, 33);
+		frame.getContentPane().add(btnViewTeacher);
 		
-		JButton btnDisplayStudents = new JButton("View Students");
-		btnDisplayStudents.addActionListener(new ActionListener() {
+		JButton btnViewStudents = new JButton("View Students");
+		btnViewStudents.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ViewStudents viewstudents = new ViewStudents();
 	     		   AdminDashBoard.setVisible(false);
@@ -81,10 +75,10 @@ public class AdminDashBoard {
 			}
 		});
 		
-		btnDisplayStudents.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-		btnDisplayStudents.setBackground(SystemColor.activeCaption);
-		btnDisplayStudents.setBounds(334, 416, 234, 33);
-		frame.getContentPane().add(btnDisplayStudents);
+		btnViewStudents.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+		btnViewStudents.setBackground(SystemColor.activeCaption);
+		btnViewStudents.setBounds(334, 416, 234, 33);
+		frame.getContentPane().add(btnViewStudents);
 		
 		JButton btnAddTeachers = new JButton("Add Teachers");
 		btnAddTeachers.addActionListener(new ActionListener() {
@@ -143,8 +137,8 @@ public class AdminDashBoard {
 		btnRemoveStudent.setBounds(334, 372, 234, 33);
 		frame.getContentPane().add(btnRemoveStudent);
 		
-		JButton btnAddTimeslot = new JButton("Manage TimeSlots");
-		btnAddTimeslot.addActionListener(new ActionListener() {
+		JButton btnManageTimeSlots = new JButton("Manage TimeSlots");
+		btnManageTimeSlots.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ManageTimeSlots managetimeslots = new ManageTimeSlots();
      		   AdminDashBoard.setVisible(false);
@@ -152,29 +146,29 @@ public class AdminDashBoard {
 			}
 		});
 		
-		btnAddTimeslot.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-		btnAddTimeslot.setBackground(SystemColor.activeCaption);
-		btnAddTimeslot.setBounds(44, 281, 524, 33);
-		frame.getContentPane().add(btnAddTimeslot);
+		btnManageTimeSlots.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+		btnManageTimeSlots.setBackground(SystemColor.activeCaption);
+		btnManageTimeSlots.setBounds(44, 281, 524, 33);
+		frame.getContentPane().add(btnManageTimeSlots);
 		
-		JButton btnExit = new JButton("Log Out");
-		btnExit.addActionListener(new ActionListener() {
+		JButton btnLogOut = new JButton("Log Out");
+		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
 		
-		btnExit.setForeground(SystemColor.desktop);
-		btnExit.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-		btnExit.setBackground(SystemColor.activeCaption);
-		btnExit.setBounds(177, 460, 269, 33);
-		frame.getContentPane().add(btnExit);
+		btnLogOut.setForeground(SystemColor.desktop);
+		btnLogOut.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+		btnLogOut.setBackground(SystemColor.activeCaption);
+		btnLogOut.setBounds(177, 460, 269, 33);
+		frame.getContentPane().add(btnLogOut);
 		frame.setBounds(100, 100, 641, 545);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	protected static void setVisible(boolean b) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

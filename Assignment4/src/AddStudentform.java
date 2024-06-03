@@ -1,5 +1,6 @@
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -19,13 +20,11 @@ import java.sql.SQLException;
 public class AddStudentform {
 
     JFrame frame;
-    private JTextField textField;
-    private JTextField textField_1;
-    private JTextField textField_2;
+    private JTextField StudentName;
+    private JTextField EnrollmentID;
+    private JTextField Section;
 
-    /**
-     * Launch the application.
-     */
+   
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -39,16 +38,12 @@ public class AddStudentform {
         });
     }
 
-    /**
-     * Create the application.
-     */
+    
     public AddStudentform() {
         initialize();
     }
 
-    /**
-     * Initialize the contents of the frame.
-     */
+    
     private void initialize() {
         frame = new JFrame();
         frame.getContentPane().setBackground(SystemColor.inactiveCaption);
@@ -81,41 +76,41 @@ public class AddStudentform {
         lblEnterSection.setBounds(10, 387, 97, 25);
         frame.getContentPane().add(lblEnterSection);
 
-        textField = new JTextField();
-        textField.setColumns(10);
-        textField.setBounds(10, 298, 521, 25);
-        frame.getContentPane().add(textField);
+        StudentName = new JTextField();
+        StudentName.setColumns(10);
+        StudentName.setBounds(10, 298, 521, 25);
+        frame.getContentPane().add(StudentName);
 
-        textField_1 = new JTextField();
-        textField_1.setColumns(10);
-        textField_1.setBounds(10, 355, 521, 25);
-        frame.getContentPane().add(textField_1);
+        EnrollmentID = new JTextField();
+        EnrollmentID.setColumns(10);
+        EnrollmentID.setBounds(10, 355, 521, 25);
+        frame.getContentPane().add(EnrollmentID);
 
-        textField_2 = new JTextField();
-        textField_2.setColumns(10);
-        textField_2.setBounds(10, 411, 521, 25);
-        frame.getContentPane().add(textField_2);
+        Section = new JTextField();
+        Section.setColumns(10);
+        Section.setBounds(10, 411, 521, 25);
+        frame.getContentPane().add(Section);
 
-        JButton btnNewButton_2 = new JButton("Close");
-        btnNewButton_2.addActionListener(new ActionListener() {
+        JButton btnClose = new JButton("Close");
+        btnClose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
-        btnNewButton_2.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-        btnNewButton_2.setBounds(399, 468, 132, 32);
-        frame.getContentPane().add(btnNewButton_2);
+        btnClose.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        btnClose.setBounds(399, 447, 132, 32);
+        frame.getContentPane().add(btnClose);
 
-        JButton btnNewButton_1 = new JButton("Clear");
-        btnNewButton_1.addActionListener(new ActionListener() {
+        JButton btnClear = new JButton("Clear");
+        btnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                textField.setText("");
-                textField_1.setText("");
-                textField_2.setText("");
+                StudentName.setText("");
+                EnrollmentID.setText("");
+                Section.setText("");
             }
         });
-        btnNewButton_1.setBounds(206, 468, 146, 32);
-        frame.getContentPane().add(btnNewButton_1);
+        btnClear.setBounds(206, 447, 146, 32);
+        frame.getContentPane().add(btnClear);
 
         JButton btnAdd = new JButton("Add");
         btnAdd.addActionListener(new ActionListener() {
@@ -124,16 +119,16 @@ public class AddStudentform {
             }
         });
 
-        btnAdd.setBounds(10, 468, 146, 32);
+        btnAdd.setBounds(10, 447, 146, 32);
         frame.getContentPane().add(btnAdd);
-        frame.setBounds(100, 100, 585, 558);
+        frame.setBounds(100, 100, 585, 538);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     private void addStudent() {
-        String name = textField.getText();
-        String enrollmentID = textField_1.getText();
-        String section = textField_2.getText();
+        String name = StudentName.getText();
+        String enrollmentID = EnrollmentID.getText();
+        String section = Section.getText();
 
         if (name.isEmpty() || enrollmentID.isEmpty() || section.isEmpty()) {
             JOptionPane.showMessageDialog(frame, "Please fill in all fields", "Error", JOptionPane.ERROR_MESSAGE);
@@ -151,9 +146,9 @@ public class AddStudentform {
             pstmt.setString(3, section);
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(frame, "Student added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            textField.setText("");
-            textField_1.setText("");
-            textField_2.setText("");
+            StudentName.setText("");
+            EnrollmentID.setText("");
+            Section.setText("");
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(frame, "Error adding student to the database", "Error", JOptionPane.ERROR_MESSAGE);

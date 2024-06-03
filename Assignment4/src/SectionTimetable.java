@@ -70,16 +70,16 @@ public class SectionTimetable {
 
         fetchAndPopulateSections(SectionID);
 
-        JButton btnNewButton = new JButton("Close");
-        btnNewButton.setBounds(324, 545, 124, 33);
-        frame.getContentPane().add(btnNewButton);
+        JButton btnClose = new JButton("Close");
+        btnClose.setBounds(324, 545, 124, 33);
+        frame.getContentPane().add(btnClose);
 
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(30, 319, 693, 206);
-        frame.getContentPane().add(scrollPane);
+        JScrollPane TimeTable = new JScrollPane();
+        TimeTable.setBounds(30, 319, 693, 206);
+        frame.getContentPane().add(TimeTable);
 
         timetableTable = new JTable();
-        scrollPane.setViewportView(timetableTable);
+        TimeTable.setViewportView(timetableTable);
 
         fetchAndPopulateTimetable(SectionID);
     }

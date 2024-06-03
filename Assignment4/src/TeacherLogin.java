@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class TeacherLogin {
 
     public JFrame frame;
-    private JTextField textField;
+    private JTextField EnterApplicationID;
     private Connection connection;
 
     public static void main(String[] args) {
@@ -42,7 +42,7 @@ public class TeacherLogin {
 
     private void connectToDatabase() {
         try {
-            // Replace these with your database credentials
+           
             String url = "jdbc:mysql://localhost:3306/assignment4";
             String user = "root";
             String password = "12345678";
@@ -73,52 +73,52 @@ public class TeacherLogin {
         lblApplicationId.setBounds(10, 262, 97, 25);
         frame.getContentPane().add(lblApplicationId);
 
-        textField = new JTextField();
-        textField.setColumns(10);
-        textField.setBounds(10, 298, 433, 25);
-        frame.getContentPane().add(textField);
+        EnterApplicationID = new JTextField();
+        EnterApplicationID.setColumns(10);
+        EnterApplicationID.setBounds(10, 298, 433, 25);
+        frame.getContentPane().add(EnterApplicationID);
 
         JLabel lblTeacherLogin = new JLabel("Teacher Login");
         lblTeacherLogin.setFont(new Font("Times New Roman", Font.BOLD, 24));
         lblTeacherLogin.setBounds(140, 215, 165, 42);
         frame.getContentPane().add(lblTeacherLogin);
 
-        JButton btnNewButton = new JButton("View");
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton btnView = new JButton("View");
+        btnView.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String applicationId = textField.getText();
+                String applicationId = EnterApplicationID.getText();
                 if (validateApplicationId(applicationId)) {
                 	
                     TeacherTimetable teacherTimetable = new TeacherTimetable(applicationId);
-                    frame.setVisible(false); // Hide the current login frame
-                    teacherTimetable.frame.setVisible(true); // Show the teacher timetable form
+                    frame.setVisible(false);
+                    teacherTimetable.frame.setVisible(true); 
                 } else {
                     JOptionPane.showMessageDialog(frame, "Invalid Application ID. Please try again.");
                 }
             }
         });
         
-        btnNewButton.setBounds(10, 372, 117, 32);
-        frame.getContentPane().add(btnNewButton);
+        btnView.setBounds(10, 372, 117, 32);
+        frame.getContentPane().add(btnView);
 
-        JButton btnNewButton_1 = new JButton("Clear");
-        btnNewButton_1.addActionListener(new ActionListener() {
+        JButton btnClear = new JButton("Clear");
+        btnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                textField.setText("");
+                EnterApplicationID.setText("");
             }
         });
-        btnNewButton_1.setBounds(176, 372, 117, 32);
-        frame.getContentPane().add(btnNewButton_1);
+        btnClear.setBounds(176, 372, 117, 32);
+        frame.getContentPane().add(btnClear);
 
-        JButton btnNewButton_2 = new JButton("Close");
-        btnNewButton_2.addActionListener(new ActionListener() {
+        JButton bntClose = new JButton("Close");
+        bntClose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
-        btnNewButton_2.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-        btnNewButton_2.setBounds(331, 372, 112, 32);
-        frame.getContentPane().add(btnNewButton_2);
+        bntClose.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        bntClose.setBounds(331, 372, 112, 32);
+        frame.getContentPane().add(bntClose);
     }
 
     private boolean validateApplicationId(String applicationId) {
@@ -131,7 +131,7 @@ public class TeacherLogin {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                isValid = true; // Application ID exists in the table
+                isValid = true; 
             }
 
             resultSet.close();

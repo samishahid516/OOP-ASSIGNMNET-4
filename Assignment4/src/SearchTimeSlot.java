@@ -20,14 +20,12 @@ import javax.swing.JScrollPane;
 public class SearchTimeSlot {
 
     JFrame frame;
-    private JTextField textField;
-    private JTextField textField_1;
+    private JTextField EnterDay;
+    private JTextField EnterStartTime;
     private JTable table;
     private DefaultTableModel tableModel;
 
-    /**
-     * Launch the application.
-     */
+   
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -41,20 +39,16 @@ public class SearchTimeSlot {
         });
     }
 
-    /**
-     * Create the application.
-     */
+   
     public SearchTimeSlot() {
         initialize();
     }
 
-    /**
-     * Initialize the contents of the frame.
-     */
+    
     private void initialize() {
         frame = new JFrame();
         frame.getContentPane().setBackground(SystemColor.inactiveCaption);
-        frame.setBounds(100, 100, 777, 614);
+        frame.setBounds(100, 100, 777, 573);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
         
@@ -75,72 +69,72 @@ public class SearchTimeSlot {
         lblEnterName.setBounds(38, 268, 97, 25);
         frame.getContentPane().add(lblEnterName);
         
-        textField = new JTextField();
-        textField.setColumns(10);
-        textField.setBounds(130, 269, 194, 25);
-        frame.getContentPane().add(textField);
+        EnterDay = new JTextField();
+        EnterDay.setColumns(10);
+        EnterDay.setBounds(130, 269, 194, 25);
+        frame.getContentPane().add(EnterDay);
         
         JLabel lblEnterApplicationId = new JLabel("Enter Start Time :");
         lblEnterApplicationId.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         lblEnterApplicationId.setBounds(412, 268, 112, 25);
         frame.getContentPane().add(lblEnterApplicationId);
         
-        textField_1 = new JTextField();
-        textField_1.setColumns(10);
-        textField_1.setBounds(537, 269, 194, 25);
-        frame.getContentPane().add(textField_1);
+        EnterStartTime = new JTextField();
+        EnterStartTime.setColumns(10);
+        EnterStartTime.setBounds(537, 269, 194, 25);
+        frame.getContentPane().add(EnterStartTime);
         
         JButton btnNewButton_2 = new JButton("Close");
         btnNewButton_2.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         btnNewButton_2.setBounds(585, 542, 0, 32);
         frame.getContentPane().add(btnNewButton_2);
         
-        JButton btnLogin = new JButton("Search");
-        btnLogin.setBounds(286, 520, 184, 32);
-        frame.getContentPane().add(btnLogin);
-        btnLogin.addActionListener(new ActionListener() {
+        JButton btnSearch = new JButton("Search");
+        btnSearch.setBounds(285, 495, 184, 32);
+        frame.getContentPane().add(btnSearch);
+        btnSearch.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 searchTimeSlot();
             }
         });
         
-        JButton btnNewButton_1 = new JButton("Clear");
-        btnNewButton_1.addActionListener(new ActionListener() {
+        JButton btnClear = new JButton("Clear");
+        btnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                textField_1.setText(null);
-                textField.setText(null);
+                EnterStartTime.setText(null);
+                EnterDay.setText(null);
                 tableModel.setRowCount(0);
             }
         });
         
-        btnNewButton_1.setBounds(38, 520, 167, 32);
-        frame.getContentPane().add(btnNewButton_1);
+        btnClear.setBounds(38, 495, 167, 32);
+        frame.getContentPane().add(btnClear);
         
-        JButton btnNewButton_2_1 = new JButton("Close");
-        btnNewButton_2_1.addActionListener(new ActionListener() {
+        JButton btnClose = new JButton("Close");
+        btnClose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
         
-        btnNewButton_2_1.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-        btnNewButton_2_1.setBounds(564, 520, 167, 32);
-        frame.getContentPane().add(btnNewButton_2_1);
+        btnClose.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        btnClose.setBounds(563, 495, 167, 32);
+        frame.getContentPane().add(btnClose);
         
         tableModel = new DefaultTableModel(new Object[]{"CourseName", "DayOfWeek", "StartTime", "EndTime", "RoomID", "SectionID"}, 0);
         
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(38, 315, 693, 169);
-        frame.getContentPane().add(scrollPane);
+        JScrollPane TimeTable = new JScrollPane();
+        TimeTable.setBounds(38, 315, 693, 169);
+        frame.getContentPane().add(TimeTable);
 
         table = new JTable(tableModel);
-        scrollPane.setViewportView(table);
+        TimeTable.setViewportView(table);
         table.setBackground(Color.WHITE);
     }
 
     private void searchTimeSlot() {
-        String day = textField.getText();
-        String startTime = textField_1.getText();
+        String day = EnterDay.getText();
+        String startTime = EnterStartTime.getText();
         
         try {
             Connection connection = getConnection();
@@ -148,7 +142,7 @@ public class SearchTimeSlot {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             
-            tableModel.setRowCount(0); // Clear existing data
+            tableModel.setRowCount(0); 
             
             while (resultSet.next()) {
                 String courseName = resultSet.getString("CourseName");

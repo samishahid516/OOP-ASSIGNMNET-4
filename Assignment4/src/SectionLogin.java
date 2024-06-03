@@ -19,15 +19,13 @@ import java.awt.event.ActionEvent;
 public class SectionLogin {
 
     JFrame frame;
-    // Define SQL connection parameters
+    
     private static final String DB_URL = "jdbc:mysql://localhost:3306/assignment4";
     private static final String USER = "root";
     private static final String PASS = "12345678";
-    private JTextField textField;
+    private JTextField EnterRoom;
 
-    /**
-     * Launch the application.
-     */
+   
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -41,16 +39,12 @@ public class SectionLogin {
         });
     }
 
-    /**
-     * Create the application.
-     */
+    
     public SectionLogin() {
         initialize();
     }
 
-    /**
-     * Initialize the contents of the frame.
-     */
+    
     private void initialize() {
         frame = new JFrame();
         frame.getContentPane().setBackground(SystemColor.inactiveCaption);
@@ -75,31 +69,31 @@ public class SectionLogin {
         lblEnterRoomababa.setBounds(10, 261, 202, 25);
         frame.getContentPane().add(lblEnterRoomababa);
 
-        textField = new JTextField();
-        textField.setColumns(10);
-        textField.setBounds(10, 287, 433, 25);
-        frame.getContentPane().add(textField);
+        EnterRoom = new JTextField();
+        EnterRoom.setColumns(10);
+        EnterRoom.setBounds(10, 287, 433, 25);
+        frame.getContentPane().add(EnterRoom);
 
-        JButton btnNewButton_2 = new JButton("Close");
-        btnNewButton_2.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-        btnNewButton_2.setBounds(331, 342, 112, 32);
-        frame.getContentPane().add(btnNewButton_2);
+        JButton btnClose = new JButton("Close");
+        btnClose.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        btnClose.setBounds(331, 342, 112, 32);
+        frame.getContentPane().add(btnClose);
 
-        JButton btnNewButton_1 = new JButton("Clear");
-        btnNewButton_1.setBounds(166, 342, 117, 32);
-        frame.getContentPane().add(btnNewButton_1);
+        JButton btnClear = new JButton("Clear");
+        btnClear.setBounds(166, 342, 117, 32);
+        frame.getContentPane().add(btnClear);
 
-        JButton btnNewButton = new JButton("View");
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton btnView = new JButton("View");
+        btnView.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
                 
-                String SectionId = textField.getText().trim();
+                String SectionId = EnterRoom.getText().trim();
 
                 
                 if (!SectionId.isEmpty()) {
                     try {
-                        // Establish database connection
+                      
                         Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
 
                         
@@ -122,12 +116,12 @@ public class SectionLogin {
                             JOptionPane.showMessageDialog(frame, "Invalid Section Id", "Error", JOptionPane.ERROR_MESSAGE);
                         }
 
-                        // Close database resources
+                       
                         resultSet.close();
                         statement.close();
                         connection.close();
                     } catch (SQLException ex) {
-                        ex.printStackTrace(); // Handle database errors
+                        ex.printStackTrace(); 
                     }
                 } else {
                     
@@ -136,7 +130,7 @@ public class SectionLogin {
             }
         });
 
-        btnNewButton.setBounds(10, 342, 117, 32);
-        frame.getContentPane().add(btnNewButton);
+        btnView.setBounds(10, 342, 117, 32);
+        frame.getContentPane().add(btnView);
     }
 }

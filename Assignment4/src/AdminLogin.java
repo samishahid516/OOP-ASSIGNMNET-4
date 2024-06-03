@@ -19,12 +19,9 @@ import javax.swing.JOptionPane;
 public class AdminLogin {
 
     JFrame frame;
-    private JTextField textField;
-    private JTextField textField_1;
+    private JTextField AdminName;
+    private JTextField AdminApplicationID;
 
-    /**
-     * Launch the application.
-     */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -38,20 +35,16 @@ public class AdminLogin {
         });
     }
 
-    /**
-     * Create the application.
-     */
+   
     public AdminLogin() {
         initialize();
     }
 
-    /**
-     * Initialize the contents of the frame.
-     */
+   
     private void initialize() {
         frame = new JFrame();
         frame.getContentPane().setBackground(SystemColor.inactiveCaption);
-        frame.setBounds(100, 100, 585, 524);
+        frame.setBounds(100, 100, 585, 475);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
@@ -65,20 +58,20 @@ public class AdminLogin {
         lblEnterName.setBounds(22, 253, 97, 25);
         frame.getContentPane().add(lblEnterName);
 
-        textField = new JTextField();
-        textField.setColumns(10);
-        textField.setBounds(22, 274, 521, 25);
-        frame.getContentPane().add(textField);
+        AdminName = new JTextField();
+        AdminName.setColumns(10);
+        AdminName.setBounds(22, 274, 521, 25);
+        frame.getContentPane().add(AdminName);
 
         JLabel lblEnterApplicationId = new JLabel("Enter Application ID :");
         lblEnterApplicationId.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         lblEnterApplicationId.setBounds(22, 322, 132, 25);
         frame.getContentPane().add(lblEnterApplicationId);
 
-        textField_1 = new JTextField();
-        textField_1.setColumns(10);
-        textField_1.setBounds(22, 345, 521, 25);
-        frame.getContentPane().add(textField_1);
+        AdminApplicationID = new JTextField();
+        AdminApplicationID.setColumns(10);
+        AdminApplicationID.setBounds(22, 345, 521, 25);
+        frame.getContentPane().add(AdminApplicationID);
 
         JButton btnLogin = new JButton("Login");
         btnLogin.addActionListener(new ActionListener() {
@@ -87,30 +80,30 @@ public class AdminLogin {
             }
         });
 
-        btnLogin.setBounds(22, 410, 146, 32);
+        btnLogin.setBounds(21, 391, 146, 32);
         frame.getContentPane().add(btnLogin);
 
-        JButton btnNewButton_1 = new JButton("Clear");
-        btnNewButton_1.addActionListener(new ActionListener() {
+        JButton btnClear = new JButton("Clear");
+        btnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                textField.setText(null);
-                textField_1.setText(null);
+                AdminName.setText(null);
+                AdminApplicationID.setText(null);
             }
         });
 
-        btnNewButton_1.setBounds(213, 410, 140, 32);
-        frame.getContentPane().add(btnNewButton_1);
+        btnClear.setBounds(214, 391, 140, 32);
+        frame.getContentPane().add(btnClear);
 
-        JButton btnNewButton_2 = new JButton("Close");
-        btnNewButton_2.addActionListener(new ActionListener() {
+        JButton btnClose = new JButton("Close");
+        btnClose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
 
-        btnNewButton_2.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-        btnNewButton_2.setBounds(409, 410, 132, 32);
-        frame.getContentPane().add(btnNewButton_2);
+        btnClose.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        btnClose.setBounds(411, 391, 132, 32);
+        frame.getContentPane().add(btnClose);
 
         JLabel label1 = new JLabel("picture");
         ImageIcon img = new ImageIcon(this.getClass().getResource("/bahria-university-logo (1).jpg"));
@@ -125,8 +118,8 @@ public class AdminLogin {
     }
 
     private void verifyUserAndMoveToDashboard() {
-        String applicationID = textField_1.getText();
-        String name = textField.getText();
+        String applicationID = AdminApplicationID.getText();
+        String name = AdminName.getText();
 
         if (applicationID.isEmpty() || name.isEmpty()) {
             JOptionPane.showMessageDialog(frame, "Please fill in all fields", "Error", JOptionPane.ERROR_MESSAGE);
@@ -138,17 +131,16 @@ public class AdminLogin {
         ResultSet rs = null;
 
         try {
-            // Establish connection to the database
+            
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment4", "root", "12345678");
 
-            // Check if ApplicationID exists
             String sql = "SELECT COUNT(*) FROM admin WHERE ApplicationID = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, applicationID);
             rs = pstmt.executeQuery();
 
             if (rs.next() && rs.getInt(1) > 0) {
-                // Application ID exists, move to AdminDashBoard
+                
                 AdminDashBoard adminDashboard = new AdminDashBoard();
                 frame.setVisible(false);
                 adminDashboard.frame.setVisible(true);

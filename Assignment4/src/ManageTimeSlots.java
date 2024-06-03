@@ -22,27 +22,25 @@ import javax.swing.JScrollPane;
 public class ManageTimeSlots {
 
     JFrame frame;
-    private JTextField textField;
-    private JTextField textField_2;
-    private JTextField textField_3;
-    private JTextField textField_4;
-    private JTextField textField_5;
-    private JTextField textField_6;
-    private JTextField textField_7;
+    private JTextField EnterDay;
+    private JTextField EnterStartTime;
+    private JTextField EnterTeacherName;
+    private JTextField EnterEndTime;
+    private JTextField EnterCourseName;
+    private JTextField EnterTeacherID;
+    private JTextField EnterRoom;
     private JTable timetableTable;
-    private JTextField textField_1;
+    private JTextField ModifySection;
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/assignment4";
     private static final String USER = "root";
     private static final String PASS = "12345678"; 
     
     private JTextField textField_9;
-    private JTextField textField_10;
-    private JTextField textField_11;
+    private JTextField EnterSectionID;
+    private JTextField EnterStudentID;
 
-    /**
-     * Launch the application.
-     */
+    
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -56,16 +54,12 @@ public class ManageTimeSlots {
         });
     }
 
-    /**
-     * Create the application.
-     */
+    
     public ManageTimeSlots() {
         initialize();
     }
 
-    /**
-     * Initialize the contents of the frame.
-     */
+   
     private void initialize() {
         frame = new JFrame();
         frame.getContentPane().setBackground(SystemColor.inactiveCaption);
@@ -90,10 +84,10 @@ public class ManageTimeSlots {
         lblEnterName.setBounds(27, 525, 97, 25);
         frame.getContentPane().add(lblEnterName);
 
-        textField = new JTextField();
-        textField.setColumns(10);
-        textField.setBounds(97, 526, 76, 25);
-        frame.getContentPane().add(textField);
+        EnterDay = new JTextField();
+        EnterDay.setColumns(10);
+        EnterDay.setBounds(97, 526, 76, 25);
+        frame.getContentPane().add(EnterDay);
 
         JLabel lblEnterStartTime = new JLabel("Enter Start Time :");
         lblEnterStartTime.setFont(new Font("Times New Roman", Font.PLAIN, 14));
@@ -115,25 +109,25 @@ public class ManageTimeSlots {
         lblEnterName_4.setBounds(546, 525, 117, 25);
         frame.getContentPane().add(lblEnterName_4);
 
-        textField_2 = new JTextField();
-        textField_2.setColumns(10);
-        textField_2.setBounds(290, 526, 64, 25);
-        frame.getContentPane().add(textField_2);
+        EnterStartTime = new JTextField();
+        EnterStartTime.setColumns(10);
+        EnterStartTime.setBounds(290, 526, 64, 25);
+        frame.getContentPane().add(EnterStartTime);
 
-        textField_3 = new JTextField();
-        textField_3.setColumns(10);
-        textField_3.setBounds(166, 569, 134, 25);
-        frame.getContentPane().add(textField_3);
+        EnterTeacherName = new JTextField();
+        EnterTeacherName.setColumns(10);
+        EnterTeacherName.setBounds(166, 569, 134, 25);
+        frame.getContentPane().add(EnterTeacherName);
 
-        textField_4 = new JTextField();
-        textField_4.setColumns(10);
-        textField_4.setBounds(471, 526, 65, 25);
-        frame.getContentPane().add(textField_4);
+        EnterEndTime = new JTextField();
+        EnterEndTime.setColumns(10);
+        EnterEndTime.setBounds(471, 526, 65, 25);
+        frame.getContentPane().add(EnterEndTime);
 
-        textField_5 = new JTextField();
-        textField_5.setColumns(10);
-        textField_5.setBounds(673, 526, 179, 25);
-        frame.getContentPane().add(textField_5);
+        EnterCourseName = new JTextField();
+        EnterCourseName.setColumns(10);
+        EnterCourseName.setBounds(673, 526, 179, 25);
+        frame.getContentPane().add(EnterCourseName);
 
         JLabel lblEnterName_3_1 = new JLabel("Enter Teacher ID :");
         lblEnterName_3_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
@@ -145,35 +139,35 @@ public class ManageTimeSlots {
         lblEnterName_3_2.setBounds(556, 568, 87, 25);
         frame.getContentPane().add(lblEnterName_3_2);
 
-        textField_6 = new JTextField();
-        textField_6.setColumns(10);
-        textField_6.setBounds(439, 569, 97, 25);
-        frame.getContentPane().add(textField_6);
+        EnterTeacherID = new JTextField();
+        EnterTeacherID.setColumns(10);
+        EnterTeacherID.setBounds(439, 569, 97, 25);
+        frame.getContentPane().add(EnterTeacherID);
 
-        textField_7 = new JTextField();
-        textField_7.setColumns(10);
-        textField_7.setBounds(636, 569, 87, 25);
-        frame.getContentPane().add(textField_7);
+        EnterRoom = new JTextField();
+        EnterRoom.setColumns(10);
+        EnterRoom.setBounds(636, 569, 87, 25);
+        frame.getContentPane().add(EnterRoom);
 
-        JButton btnNewButton_2 = new JButton("Close");
-        btnNewButton_2.addActionListener(new ActionListener() {
+        JButton btnClose = new JButton("Close");
+        btnClose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
-        btnNewButton_2.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-        btnNewButton_2.setBounds(755, 630, 164, 32);
-        frame.getContentPane().add(btnNewButton_2);
+        btnClose.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        btnClose.setBounds(862, 607, 176, 32);
+        frame.getContentPane().add(btnClose);
 
-        JButton btnNewButton_1 = new JButton("Clear");
-        btnNewButton_1.addActionListener(new ActionListener() {
+        JButton btnClear = new JButton("Clear");
+        btnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 clearFields();
             }
         });
 
-        btnNewButton_1.setBounds(515, 630, 170, 32);
-        frame.getContentPane().add(btnNewButton_1);
+        btnClear.setBounds(586, 607, 179, 32);
+        frame.getContentPane().add(btnClear);
 
         JButton btnAdd = new JButton("Add");
         btnAdd.addActionListener(new ActionListener() {
@@ -183,7 +177,7 @@ public class ManageTimeSlots {
         });
         
         
-        btnAdd.setBounds(265, 630, 164, 32);
+        btnAdd.setBounds(290, 607, 184, 32);
         frame.getContentPane().add(btnAdd);
 
         JButton btnRemove = new JButton("Remove");
@@ -193,7 +187,7 @@ public class ManageTimeSlots {
             }
         });
 
-        btnRemove.setBounds(27, 630, 164, 32);
+        btnRemove.setBounds(27, 607, 179, 32);
         frame.getContentPane().add(btnRemove);
 
         JButton btnEdit = new JButton("Edit");
@@ -216,18 +210,18 @@ public class ManageTimeSlots {
         lblTimeslot_1.setBounds(337, 82, 401, 25);
         frame.getContentPane().add(lblTimeslot_1);
 
-        textField_1 = new JTextField();
-        textField_1.setBounds(337, 120, 146, 25);
-        frame.getContentPane().add(textField_1);
-        textField_1.setColumns(10);
+        ModifySection = new JTextField();
+        ModifySection.setBounds(337, 120, 146, 25);
+        frame.getContentPane().add(ModifySection);
+        ModifySection.setColumns(10);
 
         JButton btnShowTimeSlots = new JButton("Show TimeSlots");
         btnShowTimeSlots.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String sectionID = textField_1.getText().trim(); // Retrieve the SectionID from textField_1
+                String sectionID = ModifySection.getText().trim(); 
 
                 if (!sectionID.isEmpty()) {
-                    fetchAndPopulateTimetable(sectionID); // Call the method to fetch and populate the timetable
+                    fetchAndPopulateTimetable(sectionID); 
                 } else {
                     JOptionPane.showMessageDialog(frame, "Please enter a Section Id", "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -237,51 +231,51 @@ public class ManageTimeSlots {
         btnShowTimeSlots.setBounds(493, 120, 146, 25);
         frame.getContentPane().add(btnShowTimeSlots);
 
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(29, 254, 940, 200);
-        frame.getContentPane().add(scrollPane);
+        JScrollPane Table = new JScrollPane();
+        Table.setBounds(29, 254, 940, 200);
+        frame.getContentPane().add(Table);
 
         timetableTable = new JTable();
-        scrollPane.setViewportView(timetableTable);
+        Table.setViewportView(timetableTable);
         
         JLabel lblEnterName_3_1_1 = new JLabel("Enter Section ID :");
         lblEnterName_3_1_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         lblEnterName_3_1_1.setBounds(862, 525, 113, 25);
         frame.getContentPane().add(lblEnterName_3_1_1);
         
-        textField_10 = new JTextField();
-        textField_10.setColumns(10);
-        textField_10.setBounds(973, 526, 70, 25);
-        frame.getContentPane().add(textField_10);
+        EnterSectionID = new JTextField();
+        EnterSectionID.setColumns(10);
+        EnterSectionID.setBounds(973, 526, 70, 25);
+        frame.getContentPane().add(EnterSectionID);
         
-        JLabel lblEnterName_3_1_1_1 = new JLabel("Enter Section ID :");
+        JLabel lblEnterName_3_1_1_1 = new JLabel("Enter Student ID :");
         lblEnterName_3_1_1_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         lblEnterName_3_1_1_1.setBounds(739, 568, 113, 25);
         frame.getContentPane().add(lblEnterName_3_1_1_1);
         
-        textField_11 = new JTextField();
-        textField_11.setColumns(10);
-        textField_11.setBounds(864, 568, 179, 25);
-        frame.getContentPane().add(textField_11);
+        EnterStudentID = new JTextField();
+        EnterStudentID.setColumns(10);
+        EnterStudentID.setBounds(864, 568, 179, 25);
+        frame.getContentPane().add(EnterStudentID);
     
     }
     private void addRow() {
-        // Retrieve data from text fields
-        String dayOfWeek = textField.getText();
-        String startTime = textField_2.getText();
-        String teacherName = textField_3.getText();
-        String endTime = textField_4.getText();
-        String courseName = textField_5.getText();
-        String teacherID = textField_6.getText();
-        String roomID = textField_7.getText();
-        String studentID = textField_11.getText();
-        String sectionID = textField_10.getText();
+     
+        String dayOfWeek = EnterDay.getText();
+        String startTime = EnterStartTime.getText();
+        String teacherName = EnterTeacherName.getText();
+        String endTime = EnterEndTime.getText();
+        String courseName = EnterCourseName.getText();
+        String teacherID = EnterTeacherID.getText();
+        String roomID = EnterRoom.getText();
+        String studentID = EnterStudentID.getText();
+        String sectionID = EnterSectionID.getText();
 
-        // Add row to the table
+        
         DefaultTableModel model = (DefaultTableModel) timetableTable.getModel();
         model.addRow(new Object[]{teacherName, courseName, dayOfWeek, startTime, endTime, roomID});
 
-        // Insert into the MySQL database
+ 
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
             String sql = "INSERT INTO timetable (DayOfWeek, StartTime, TeacherName, EndTime, CourseName, TeacherID, RoomID, StudentID, SectionID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -309,14 +303,14 @@ public class ManageTimeSlots {
     private void fetchAndPopulateTimetable(String sectionID) {
         if (!sectionID.isEmpty()) {
             try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
-                // Verify if SectionID exists in the sections table
+          
                 String sqlVerify = "SELECT * FROM sections WHERE SectionID = ?";
                 try (PreparedStatement stmtVerify = conn.prepareStatement(sqlVerify)) {
                     stmtVerify.setString(1, sectionID);
                     ResultSet rsVerify = stmtVerify.executeQuery();
 
                     if (rsVerify.next()) {
-                        // SectionID is valid, proceed to fetch timetable
+                       
                         DefaultTableModel timetableTableModel = new DefaultTableModel(
                             new Object[]{"Teacher Name", "Course Name", "Day Of Week", "Start Time", "End Time", "Room ID"}, 0
                         );
@@ -357,16 +351,16 @@ public class ManageTimeSlots {
 
 
     private void clearFields() {
-        textField.setText("");
-        textField_2.setText("");
-        textField_3.setText("");
-        textField_4.setText("");
-        textField_5.setText("");
-        textField_6.setText("");
-        textField_7.setText("");
-        textField_1.setText("");
-        textField_11.setText("");
-        textField_10.setText("");
+        EnterDay.setText("");
+        EnterStartTime.setText("");
+        EnterTeacherName.setText("");
+        EnterEndTime.setText("");
+        EnterCourseName.setText("");
+        EnterTeacherID.setText("");
+        EnterRoom.setText("");
+        ModifySection.setText("");
+        EnterStudentID.setText("");
+        EnterSectionID.setText("");
         
     }
 
@@ -404,13 +398,13 @@ public class ManageTimeSlots {
         DefaultTableModel model = (DefaultTableModel) timetableTable.getModel();
         int selectedRow = timetableTable.getSelectedRow();
         if (selectedRow != -1) {
-            // Populate text fields with data from the selected row
-        	textField.setText(model.getValueAt(selectedRow, 2).toString()); // Day Of Week
-            textField_2.setText(model.getValueAt(selectedRow, 3).toString()); // Start Time
-            textField_3.setText(model.getValueAt(selectedRow, 0).toString()); // Teacher Name
-            textField_4.setText(model.getValueAt(selectedRow, 4).toString()); // End Time
-            textField_5.setText(model.getValueAt(selectedRow, 1).toString()); // Course Name
-            textField_7.setText(model.getValueAt(selectedRow, 5).toString()); // Room ID
+   
+        	EnterDay.setText(model.getValueAt(selectedRow, 2).toString()); 
+            EnterStartTime.setText(model.getValueAt(selectedRow, 3).toString()); 
+            EnterTeacherName.setText(model.getValueAt(selectedRow, 0).toString()); 
+            EnterEndTime.setText(model.getValueAt(selectedRow, 4).toString()); 
+            EnterCourseName.setText(model.getValueAt(selectedRow, 1).toString()); 
+            EnterRoom.setText(model.getValueAt(selectedRow, 5).toString()); 
         }
     }
 }

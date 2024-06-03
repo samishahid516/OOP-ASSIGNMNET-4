@@ -56,8 +56,8 @@ public class Mainmenu extends JFrame {
         label1.setBounds(208, 29, 239, 206);
         Mainmenu.getContentPane().add(label1);
         
-        JButton btnNewButton = new JButton(" Teacher Wise Time-table");
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton btnTeacherWiseTimeTable = new JButton(" Teacher Wise Time-table");
+        btnTeacherWiseTimeTable.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 TeacherLogin teacherlogin = new TeacherLogin();
                 Mainmenu.setVisible(false);
@@ -65,10 +65,10 @@ public class Mainmenu extends JFrame {
             }
         });
         
-        btnNewButton.setBackground(SystemColor.activeCaption);
-        btnNewButton.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-        btnNewButton.setBounds(46, 343, 236, 33);
-        Mainmenu.getContentPane().add(btnNewButton);
+        btnTeacherWiseTimeTable.setBackground(SystemColor.activeCaption);
+        btnTeacherWiseTimeTable.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        btnTeacherWiseTimeTable.setBounds(46, 343, 236, 33);
+        Mainmenu.getContentPane().add(btnTeacherWiseTimeTable);
         
         JButton btnSectionWiseTimetable = new JButton("Section Wise Time-table");
         btnSectionWiseTimetable.addActionListener(new ActionListener() {
@@ -156,8 +156,7 @@ public class Mainmenu extends JFrame {
     private Connection connectToDatabase() {
         String url = "jdbc:mysql://localhost:3306/assignment4";
         String user = "root";
-        String password = "12345678"; // Replace with your MySQL password
-
+        String password = "12345678"; 
         try {
             return DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {

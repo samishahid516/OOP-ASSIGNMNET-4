@@ -18,7 +18,7 @@ import java.sql.SQLException;
 public class RoomTimetable {
 
     JFrame frame;
-    private JTable roomTable;
+    private JTable roomIdTable;
     private JTable timetableTable;
 
     public RoomTimetable(String roomId) {
@@ -41,7 +41,7 @@ public class RoomTimetable {
     private void initialize(String roomId) {
         frame = new JFrame();
         frame.getContentPane().setBackground(SystemColor.inactiveCaption);
-        frame.setBounds(100, 100, 747, 641);
+        frame.setBounds(100, 100, 747, 603);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
@@ -58,34 +58,31 @@ public class RoomTimetable {
         frame.getContentPane().add(lblStudentTimetable);
 
         // Table for room information
-        roomTable = new JTable();
-        roomTable.setBounds(78, 270, 145, 19);
-        frame.getContentPane().add(roomTable);
+        roomIdTable = new JTable();
+        roomIdTable.setBounds(78, 270, 145, 19);
+        frame.getContentPane().add(roomIdTable);
 
-        JButton btnNewButton = new JButton("Close");
-        btnNewButton.setBounds(319, 545, 124, 33);
-        frame.getContentPane().add(btnNewButton);
+        JButton btnClose = new JButton("Close");
+        btnClose.setBounds(301, 527, 124, 33);
+        frame.getContentPane().add(btnClose);
 
         JLabel lblRoom = new JLabel("Room :");
         lblRoom.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         lblRoom.setBounds(25, 264, 52, 25);
         frame.getContentPane().add(lblRoom);
 
-        // Table for timetable information
         timetableTable = new JTable();
-        JScrollPane scrollPane = new JScrollPane(timetableTable);
-        scrollPane.setBounds(35, 300, 675, 216);
-        frame.getContentPane().add(scrollPane);
+        JScrollPane TimeTable = new JScrollPane(timetableTable);
+        TimeTable.setBounds(35, 300, 675, 216);
+        frame.getContentPane().add(TimeTable);
 
-        // Fetch and display room and timetable information
         displayRoomInfo(roomId);
         displayTimetable(roomId);
     }
 
     private void displayRoomInfo(String roomId) {
         DefaultTableModel roomTableModel = new DefaultTableModel(new Object[]{"Room ID"}, 0);
-        // Fetch room information from the database and populate the table
-        // Make sure to handle exceptions properly
+     
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment4", "root", "12345678");
              PreparedStatement stmt = conn.prepareStatement("SELECT RoomID FROM rooms WHERE RoomID = ?")) {
 
@@ -100,13 +97,12 @@ public class RoomTimetable {
             e.printStackTrace();
         }
 
-        roomTable.setModel(roomTableModel);
+        roomIdTable.setModel(roomTableModel);
     }
 
     private void displayTimetable(String roomId) {
         DefaultTableModel timetableTableModel = new DefaultTableModel(new Object[]{"TeacherName","CourseName", "DayOfWeek", "StartTime", "EndTime", "SectionID"}, 0);
-        // Fetch timetable information from the database and populate the table
-        // Make sure to handle exceptions properly
+
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment4", "root", "12345678");
              PreparedStatement stmtTimetable = conn.prepareStatement("SELECT TeacherName, CourseName, DayOfWeek, StartTime, EndTime,  SectionID FROM timetable WHERE RoomID = ?")) {
 

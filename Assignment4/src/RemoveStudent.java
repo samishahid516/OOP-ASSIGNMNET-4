@@ -19,11 +19,8 @@ import java.sql.SQLException;
 public class RemoveStudent {
 
     JFrame frame;
-    private JTextField textField;
+    private JTextField EnterEnrollmentID;
 
-    /**
-     * Launch the application.
-     */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -37,17 +34,12 @@ public class RemoveStudent {
         });
     }
 
-    /**
-     * Create the application.
-     */
+   
     public RemoveStudent() {
         initialize();
     }
 
-    /**
-     * Initialize the contents of the frame.
-     */
-    private void initialize() {
+       private void initialize() {
         frame = new JFrame();
         frame.getContentPane().setBackground(SystemColor.inactiveCaption);
         frame.getContentPane().setLayout(null);
@@ -64,40 +56,40 @@ public class RemoveStudent {
         lblRemoveStudent.setBounds(151, 213, 190, 42);
         frame.getContentPane().add(lblRemoveStudent);
         
-        JLabel lblApplicationId = new JLabel("Enter Application ID to remove :");
+        JLabel lblApplicationId = new JLabel("Enter EnrollmentID to remove :");
         lblApplicationId.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         lblApplicationId.setBounds(21, 260, 197, 25);
         frame.getContentPane().add(lblApplicationId);
         
-        textField = new JTextField();
-        textField.setColumns(10);
-        textField.setBounds(21, 284, 433, 25);
-        frame.getContentPane().add(textField);
+        EnterEnrollmentID = new JTextField();
+        EnterEnrollmentID.setColumns(10);
+        EnterEnrollmentID.setBounds(21, 284, 433, 25);
+        frame.getContentPane().add(EnterEnrollmentID);
         
-        JButton btnNewButton_2 = new JButton("Close");
-        btnNewButton_2.addActionListener(new ActionListener() {
+        JButton btnClose = new JButton("Close");
+        btnClose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
-        btnNewButton_2.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-        btnNewButton_2.setBounds(349, 339, 112, 32);
-        frame.getContentPane().add(btnNewButton_2);
+        btnClose.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        btnClose.setBounds(342, 320, 112, 32);
+        frame.getContentPane().add(btnClose);
         
-        JButton btnNewButton_1 = new JButton("Clear");
-        btnNewButton_1.addActionListener(new ActionListener() {
+        JButton BtnClear = new JButton("Clear");
+        BtnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                textField.setText(null);
+                EnterEnrollmentID.setText(null);
             }
         });
-        btnNewButton_1.setBounds(182, 339, 117, 32);
-        frame.getContentPane().add(btnNewButton_1);
+        BtnClear.setBounds(182, 320, 117, 32);
+        frame.getContentPane().add(BtnClear);
         
-        JButton btnNewButton = new JButton("Remove");
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton btnRemove = new JButton("Remove");
+        btnRemove.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Handle remove functionality here
-                String applicationID = textField.getText().trim();
+                String applicationID = EnterEnrollmentID.getText().trim();
 
                 if (applicationID.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Please enter Application ID.");
@@ -105,24 +97,24 @@ public class RemoveStudent {
                 }
 
                 try {
-                    // Establish connection to your database
+                   
                     Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment4", "root", "12345678");
 
-                    // Prepare SQL statement to delete the student from the database
+                    
                     String sql = "DELETE FROM add_student WHERE EnrollmentID = ?";
                     PreparedStatement statement = connection.prepareStatement(sql);
                     statement.setString(1, applicationID);
 
-                    // Execute the statement
+                   
                     int rowsAffected = statement.executeUpdate();
                     if (rowsAffected > 0) {
                         JOptionPane.showMessageDialog(null, "Student removed successfully.");
-                        textField.setText(""); // Clear the text field after successful removal
+                        EnterEnrollmentID.setText(""); 
                     } else {
                         JOptionPane.showMessageDialog(null, "No student found with the given Application ID.");
                     }
 
-                    // Close the statement and connection
+                 
                     statement.close();
                     connection.close();
                 } catch (SQLException ex) {
@@ -132,9 +124,9 @@ public class RemoveStudent {
             }
         });
         
-        btnNewButton.setBounds(21, 339, 117, 32);
-        frame.getContentPane().add(btnNewButton);
-        frame.setBounds(100, 100, 485, 419);
+        btnRemove.setBounds(21, 320, 117, 32);
+        frame.getContentPane().add(btnRemove);
+        frame.setBounds(100, 100, 485, 399);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

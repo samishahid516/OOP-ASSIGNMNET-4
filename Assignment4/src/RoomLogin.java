@@ -19,9 +19,9 @@ import javax.swing.JTextField;
 public class RoomLogin {
 
     JFrame frame;
-    private JTextField textField;
+    private JTextField EnterRoom;
 
-    // Define SQL connection parameters
+
     private static final String DB_URL = "jdbc:mysql://localhost:3306/assignment4";
     private static final String USER = "root";
     private static final String PASS = "12345678";
@@ -46,7 +46,7 @@ public class RoomLogin {
     private void initialize() {
         frame = new JFrame();
         frame.getContentPane().setBackground(SystemColor.inactiveCaption);
-        frame.setBounds(100, 100, 492, 449);
+        frame.setBounds(100, 100, 492, 410);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
@@ -67,61 +67,59 @@ public class RoomLogin {
         lblRoomlogin.setBounds(176, 212, 148, 42);
         frame.getContentPane().add(lblRoomlogin);
 
-        textField = new JTextField();
-        textField.setColumns(10);
-        textField.setBounds(10, 290, 433, 25);
-        frame.getContentPane().add(textField);
+        EnterRoom = new JTextField();
+        EnterRoom.setColumns(10);
+        EnterRoom.setBounds(10, 290, 433, 25);
+        frame.getContentPane().add(EnterRoom);
 
-        JButton btnNewButton_2 = new JButton("Close");
-        btnNewButton_2.addActionListener(new ActionListener() {
+        JButton btnClose = new JButton("Close");
+        btnClose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
-        btnNewButton_2.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-        btnNewButton_2.setBounds(331, 352, 112, 32);
-        frame.getContentPane().add(btnNewButton_2);
+        btnClose.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        btnClose.setBounds(331, 326, 112, 32);
+        frame.getContentPane().add(btnClose);
 
-        JButton btnNewButton_1 = new JButton("Clear");
-        btnNewButton_1.addActionListener(new ActionListener() {
+        JButton btnClear = new JButton("Clear");
+        btnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                textField.setText(null);
+                EnterRoom.setText(null);
             }
         });
-        btnNewButton_1.setBounds(164, 352, 117, 32);
-        frame.getContentPane().add(btnNewButton_1);
+        btnClear.setBounds(166, 326, 117, 32);
+        frame.getContentPane().add(btnClear);
 
-        JButton btnNewButton = new JButton("View");
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton btnView = new JButton("View");
+        btnView.addActionListener(new ActionListener() {
         	
             public void actionPerformed(ActionEvent e) {
-                // Retrieve the room ID entered by the user
-                String roomId = textField.getText().trim();
+                
+                String roomId = EnterRoom.getText().trim();
 
-                // Check if the room ID is not empty
                 if (!roomId.isEmpty()) {
                     try {
-                        // Establish database connection
+                       
                         Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
 
-                        // Prepare SQL query with a parameterized statement
+                  
                         String sql = "SELECT * FROM rooms WHERE RoomID = ?";
                         PreparedStatement statement = connection.prepareStatement(sql);
                         statement.setString(1, roomId);
 
-                        // Execute query and retrieve results
                         ResultSet resultSet = statement.executeQuery();
 
-                        // Check if the result set has any rows (i.e., valid room ID)
+                  
                         if (resultSet.next()) {
-                            // If room ID is valid, display the timetable
+                           
                         
                         	RoomTimetable roomTimetable = new RoomTimetable(roomId);
 
                             frame.setVisible(false);
                             roomTimetable.frame.setVisible(true);
                         } else {
-                            // If room ID is invalid, display an error message
+                
                             JOptionPane.showMessageDialog(frame, "Invalid room ID", "Error", JOptionPane.ERROR_MESSAGE);
                         }
 
@@ -130,16 +128,16 @@ public class RoomLogin {
                         statement.close();
                         connection.close();
                     } catch (SQLException ex) {
-                        ex.printStackTrace(); // Handle database errors
+                        ex.printStackTrace(); 
                     }
                 } else {
-                    // If room ID is empty, prompt the user to enter a room ID
+                    
                     JOptionPane.showMessageDialog(frame, "Please enter a room ID", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
 
-        btnNewButton.setBounds(10, 352, 117, 32);
-        frame.getContentPane().add(btnNewButton);
+        btnView.setBounds(10, 326, 117, 32);
+        frame.getContentPane().add(btnView);
     }
 }

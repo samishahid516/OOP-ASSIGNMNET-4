@@ -18,12 +18,10 @@ import javax.swing.JOptionPane;
 public class AddTeacher {
 
     JFrame frame;
-    private JTextField textField;
-    private JTextField textField_1;
+    private JTextField ApplicationID;
+    private JTextField TeacherName;
 
-    /**
-     * Launch the application.
-     */
+   
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -37,20 +35,16 @@ public class AddTeacher {
         });
     }
 
-    /**
-     * Create the application.
-     */
+    
     public AddTeacher() {
         initialize();
     }
 
-    /**
-     * Initialize the contents of the frame.
-     */
+    
     private void initialize() {
         frame = new JFrame();
         frame.getContentPane().setBackground(SystemColor.inactiveCaption);
-        frame.setBounds(100, 100, 600, 520);
+        frame.setBounds(100, 100, 600, 496);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
@@ -71,41 +65,41 @@ public class AddTeacher {
         lblEnterApplicationId.setBounds(10, 340, 132, 25);
         frame.getContentPane().add(lblEnterApplicationId);
 
-        textField = new JTextField();
-        textField.setColumns(10);
-        textField.setBounds(10, 363, 521, 25);
-        frame.getContentPane().add(textField);
+        ApplicationID = new JTextField();
+        ApplicationID.setColumns(10);
+        ApplicationID.setBounds(10, 363, 521, 25);
+        frame.getContentPane().add(ApplicationID);
 
-        textField_1 = new JTextField();
-        textField_1.setColumns(10);
-        textField_1.setBounds(10, 292, 521, 25);
-        frame.getContentPane().add(textField_1);
+        TeacherName = new JTextField();
+        TeacherName.setColumns(10);
+        TeacherName.setBounds(10, 292, 521, 25);
+        frame.getContentPane().add(TeacherName);
 
         JLabel lblEnterName = new JLabel("Enter Name :");
         lblEnterName.setFont(new Font("Times New Roman", Font.PLAIN, 14));
         lblEnterName.setBounds(10, 271, 97, 25);
         frame.getContentPane().add(lblEnterName);
 
-        JButton btnNewButton_2 = new JButton("Close");
-        btnNewButton_2.addActionListener(new ActionListener() {
+        JButton btnClose = new JButton("Close");
+        btnClose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
 
-        btnNewButton_2.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-        btnNewButton_2.setBounds(397, 428, 132, 32);
-        frame.getContentPane().add(btnNewButton_2);
+        btnClose.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        btnClose.setBounds(399, 409, 132, 32);
+        frame.getContentPane().add(btnClose);
 
-        JButton btnNewButton_1 = new JButton("Clear");
-        btnNewButton_1.addActionListener(new ActionListener() {
+        JButton btnClear = new JButton("Clear");
+        btnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                textField_1.setText("");
-                textField.setText("");
+                TeacherName.setText("");
+                ApplicationID.setText("");
             }
         });
-        btnNewButton_1.setBounds(201, 428, 140, 32);
-        frame.getContentPane().add(btnNewButton_1);
+        btnClear.setBounds(201, 409, 140, 32);
+        frame.getContentPane().add(btnClear);
 
         JButton btnAdd = new JButton("Add");
         btnAdd.addActionListener(new ActionListener() {
@@ -114,13 +108,13 @@ public class AddTeacher {
             }
         });
 
-        btnAdd.setBounds(10, 428, 146, 32);
+        btnAdd.setBounds(10, 409, 146, 32);
         frame.getContentPane().add(btnAdd);
     }
 
     private void addTeacher() {
-        String name = textField_1.getText();
-        String applicationID = textField.getText();
+        String name = TeacherName.getText();
+        String applicationID = ApplicationID.getText();
 
         if (name.isEmpty() || applicationID.isEmpty()) {
             JOptionPane.showMessageDialog(frame, "Please fill in all fields", "Error", JOptionPane.ERROR_MESSAGE);
@@ -131,10 +125,10 @@ public class AddTeacher {
         PreparedStatement pstmt = null;
 
         try {
-            // Establish connection to the database
+            
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment4", "root", "12345678");
 
-            // Insert teacher into the database
+            
             String sql = "INSERT INTO add_teacher (ApplicationID, Name) VALUES (?, ?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, applicationID);
@@ -142,8 +136,8 @@ public class AddTeacher {
             pstmt.executeUpdate();
 
             JOptionPane.showMessageDialog(frame, "Teacher added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            textField_1.setText("");
-            textField.setText("");
+            TeacherName.setText("");
+            ApplicationID.setText("");
 
         } catch (SQLException ex) {
             ex.printStackTrace();

@@ -35,13 +35,13 @@ public class ViewTeachers {
 
     public ViewTeachers() {
         initialize();
-        displayTeachers(); // Call displayTeachers to populate the table with teacher data
+        displayTeachers(); 
     }
 
     private void initialize() {
         frame = new JFrame();
         frame.getContentPane().setBackground(SystemColor.inactiveCaption);
-        frame.setBounds(100, 100, 593, 572);
+        frame.setBounds(100, 100, 593, 531);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
         
@@ -52,23 +52,23 @@ public class ViewTeachers {
         label1.setBounds(176, 11, 239, 206);
         frame.getContentPane().add(label1);
         
-        JLabel lblStudentLogin = new JLabel("Teacher List"); // Changed label text to "Teacher List"
+        JLabel lblStudentLogin = new JLabel("Teacher List"); 
         lblStudentLogin.setFont(new Font("Times New Roman", Font.BOLD, 24));
         lblStudentLogin.setBounds(226, 219, 147, 42);
         frame.getContentPane().add(lblStudentLogin);
         
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(36, 272, 504, 179);
-        frame.getContentPane().add(scrollPane);
+        JScrollPane TeacherListTable = new JScrollPane();
+        TeacherListTable.setBounds(41, 259, 504, 179);
+        frame.getContentPane().add(TeacherListTable);
         
         table = new JTable();
-        scrollPane.setViewportView(table);
+        TeacherListTable.setViewportView(table);
         table.setBackground(SystemColor.activeCaptionBorder);
         
-        JButton btnNewButton_2 = new JButton("Close");
-        btnNewButton_2.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-        btnNewButton_2.setBounds(214, 462, 147, 32);
-        frame.getContentPane().add(btnNewButton_2);
+        JButton btnClose = new JButton("Close");
+        btnClose.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        btnClose.setBounds(226, 449, 147, 32);
+        frame.getContentPane().add(btnClose);
     }
 
     private void displayTeachers() {
@@ -77,29 +77,23 @@ public class ViewTeachers {
         ResultSet resultSet = null;
 
         try {
-            // Establish connection to your database
+            
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment4", "root", "12345678");
 
-            // Create SQL statement
             statement = connection.createStatement();
 
-            // Execute SQL query to fetch all records from add_teacher table
             String sql = "SELECT * FROM add_teacher";
             resultSet = statement.executeQuery(sql);
 
-            // Get metadata from ResultSet
             java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
             int columnCount = metaData.getColumnCount();
 
-            // Create a DefaultTableModel to hold the data
             DefaultTableModel model = new DefaultTableModel();
 
-            // Add column names to the model
             for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
                 model.addColumn(metaData.getColumnLabel(columnIndex));
             }
 
-            // Add rows to the model
             while (resultSet.next()) {
                 Object[] rowData = new Object[columnCount];
                 for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
@@ -108,13 +102,11 @@ public class ViewTeachers {
                 model.addRow(rowData);
             }
 
-            // Set the model to the table
             table.setModel(model);
 
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            // Close result set, statement, and connection
             try {
                 if (resultSet != null) {
                     resultSet.close();
